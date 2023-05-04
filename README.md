@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-import { hiraToRoma, romaToHira} from "https://raw.githubusercontent.com/marmooo/hiraroma/main/mod.js";
+import { hiraToRoma, romaToHira } from "https://raw.githubusercontent.com/marmooo/hiraroma/main/mod.js";
 
 console.log(hiraToRoma("しょうがっこう")); // --> shougakkou
 console.log(romaToHira("chuugakkou")); // --> ちゅうがっこう
