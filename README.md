@@ -13,8 +13,8 @@ console.log(romaToHira("chuugakkou")); // --> ちゅうがっこう
 
 ## Test
 
-- install [SudachiDict](https://github.com/WorksApplications/SudachiDict)
-- `deno test --allow-read`
+1. install [SudachiDict](https://github.com/WorksApplications/SudachiDict)
+2. `deno test --allow-read`
 
 ## License
 
