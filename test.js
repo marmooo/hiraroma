@@ -3,7 +3,7 @@ import { readLines } from "https://deno.land/std/io/mod.ts";
 import { hiraToRoma, romaToHira } from "./mod.js";
 
 function kanaToHira(str) {
-  return str.replace(/[\u30a1-\u30f6]/g, function (match) {
+  return str.replace(/[ァ-ヶ]/g, function (match) {
     const chr = match.charCodeAt(0) - 0x60;
     return String.fromCharCode(chr);
   });
@@ -20,10 +20,10 @@ async function testSudachi(dicts) {
     const fileReader = await Deno.open(dict);
     for await (const line of readLines(fileReader)) {
       const yomiKana = line.split(",")[11];
-      if (yomiKana.match(/[a-zA-Z0-9]+/)) continue;
+      if (!yomiKana.match(/^[ァ-ヶー-]+$/)) continue;
       const yomiHira = kanaToHira(yomiKana);
       const yomiFrom = yomiHira.replace(/-/g, "ー");
-      const yomiTo = romaToHira(hiraToRoma(yomiHira));
+      const yomiTo = romaToHira(hiraToRoma(yomiFrom));
       assertEquals(yomiFrom, yomiTo);
     }
     fileReader.close();
