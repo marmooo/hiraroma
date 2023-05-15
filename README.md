@@ -26,3 +26,7 @@ MIT
   [JavaScriptでローマ字をカタカナに変換する関数](https://qiita.com/recordare/items/35a27f6b88b9413fef91)
 - `hiraToRoma()` is inspired from
   [cloneko/kana2romaji](https://github.com/cloneko/kana2romaji)
+
+## References
+
+- [ローマ字入力 - Wikipedia](https://ja.wikipedia.org/wiki/ローマ字入力)
