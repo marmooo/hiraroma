@@ -667,8 +667,7 @@ export function hiraToRoma(str) {
         buf = "";
       } else {
         result += uniTable[buf[0]];
-        result += uniTable[buf[1]] || buf[1];
-        buf = "";
+        buf = buf[1];
       }
     } else if (!biCheck[buf[0]]) {
       result += uniTable[char] || char;

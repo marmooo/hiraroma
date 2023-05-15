@@ -15,7 +15,7 @@ const dicts = [
   "SudachiDict/src/main/text/notcore_lex.csv",
 ];
 
-async function test(dicts) {
+async function testSudachi(dicts) {
   for (const dict of dicts) {
     const fileReader = await Deno.open(dict);
     for await (const line of readLines(fileReader)) {
@@ -30,20 +30,32 @@ async function test(dicts) {
   }
 }
 
-function testHira(yomiHira) {
-  const yomiFrom = yomiHira.replace(/-/g, "ー");
-  const yomiTo = romaToHira(hiraToRoma(yomiHira));
+function testHira(hira) {
+  const yomiFrom = hira.replace(/-/g, "ー");
+  const yomiTo = romaToHira(hiraToRoma(hira));
   assertEquals(yomiFrom, yomiTo);
+}
+
+function testRoma(hira, romaTest) {
+  hira = hira.replace(/-/g, "ー");
+  const roma = hiraToRoma(hira);
+  assertEquals(roma, romaTest);
 }
 
 Deno.test("Simple check", () => {
   testHira("-");
   testHira("っっっ");
   testHira("はがっにゃ");
+  testHira("ぎじゅつしゃ");
   testHira("吉野家");
   testHira("😄💢✋");
   testHira("👨‍👩‍👧‍👦");
 });
+Deno.test("Shortest check", () => {
+  testRoma("あかちゃん", "akachann");
+  testRoma("ぎじゅつしゃ", "gijutsusha");
+  testRoma("かがくしゃ", "kagakusha");
+});
 Deno.test("SudachiDict", async () => {
-  await test(dicts);
+  await testSudachi(dicts);
 });
