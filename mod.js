@@ -409,7 +409,7 @@ export function romaToHira(roma) {
   return result;
 }
 
-const biTable = {
+const table = {
   "うぁ": "wha",
   "うぃ": "wi",
   "うぇ": "we",
@@ -510,75 +510,6 @@ const biTable = {
   "りゅ": "ryu",
   "りぇ": "rye",
   "りょ": "ryo",
-  "っか": "kka",
-  "っき": "kki",
-  "っく": "kku",
-  "っけ": "kke",
-  "っこ": "kko",
-  "っさ": "ssa",
-  "っし": "sshi",
-  "っす": "ssu",
-  "っせ": "sse",
-  "っそ": "sso",
-  "った": "tta",
-  "っち": "cchi",
-  "っつ": "ttu",
-  "って": "tte",
-  "っと": "tto",
-  "っな": "xtuna",
-  "っに": "xtuni",
-  "っぬ": "xtunu",
-  "っね": "xtune",
-  "っの": "xtuno",
-  "っは": "hha",
-  "っひ": "hhi",
-  "っふ": "ffu",
-  "っへ": "hhe",
-  "っほ": "hho",
-  "っま": "mma",
-  "っみ": "mmi",
-  "っむ": "mmu",
-  "っめ": "mme",
-  "っも": "mmo",
-  "っや": "yya",
-  "っゆ": "yyu",
-  "っよ": "yyo",
-  "っら": "rra",
-  "っり": "rri",
-  "っる": "rru",
-  "っれ": "rre",
-  "っろ": "rro",
-  "っわ": "wwa",
-  "っが": "gga",
-  "っぎ": "ggi",
-  "っぐ": "ggu",
-  "っげ": "gge",
-  "っご": "ggo",
-  "っざ": "zza",
-  "っじ": "jji",
-  "っず": "zzu",
-  "っぜ": "zze",
-  "っぞ": "zzo",
-  "っだ": "dda",
-  "っぢ": "ddi",
-  "っづ": "ddu",
-  "っで": "dde",
-  "っど": "ddo",
-  "っば": "bba",
-  "っび": "bbi",
-  "っぶ": "bbu",
-  "っべ": "bbe",
-  "っぼ": "bbo",
-  "っぱ": "ppa",
-  "っぴ": "ppi",
-  "っぷ": "ppu",
-  "っぺ": "ppe",
-  "っぽ": "ppo",
-};
-
-const uniTable = {
-  // "ヵ": "xka",
-  // "ヶ": "xke",
   "あ": "a",
   "い": "i",
   "う": "u",
@@ -658,7 +589,6 @@ const uniTable = {
   "ゃ": "xya",
   "ゅ": "xyu",
   "ょ": "xyo",
-  "っ": "xtu",
   "ゎ": "xwa",
   "ゕ": "xka", // 実際には "ヵ" になる
   "ゖ": "xke", // 実際には "ヶ" になる
@@ -666,33 +596,28 @@ const uniTable = {
   "ー": "-",
 };
 
-const biCheck = Object.keys(biTable).reduce((obj, key) => {
-  obj[key[0]] = true;
-  return obj;
-}, {});
-
 export function hiraToRoma(str) {
-  let result = "";
-  let buf = "";
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
-    buf += char;
+  const regTu = /っ([^aiueon-])/gm;
+  const regXtu = /っ/gm;
 
-    if (buf.length === 2) {
-      if (biTable[buf]) {
-        result += biTable[buf];
-        buf = "";
-      } else {
-        result += uniTable[buf[0]];
-        buf = buf[1];
-      }
-    } else if (!biCheck[buf[0]]) {
-      result += uniTable[char] || char;
-      buf = "";
+  const max = str.length;
+  let index = 0;
+  let roma = "";
+
+  while (index < max) {
+    let char = "";
+    const twoChars = str.substring(index, index + 2);
+    const oneChar = str.substring(index, index + 1);
+    if (twoChars in table) {
+      char = table[twoChars];
+      index += 2;
+    } else {
+      char = table[oneChar] || oneChar;
+      index += 1;
     }
+    roma += char;
   }
-
-  result += buf ? uniTable[buf] : "";
-  result = result.replace(/([aiueo])ー/gi, "$1");
-  return result;
+  roma = roma.replace(regTu, "$1$1");
+  roma = roma.replace(regXtu, "xtu");
+  return roma;
 }

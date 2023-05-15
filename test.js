@@ -51,10 +51,25 @@ Deno.test("Simple check", () => {
   testHira("😄💢✋");
   testHira("👨‍👩‍👧‍👦");
 });
+Deno.test("XTU check", () => {
+  testRoma("あっー", "axtu-");
+  testRoma("あっあ", "axtua");
+  testRoma("あっい", "axtui");
+  testRoma("あっう", "axtuu");
+  testRoma("あっえ", "axtue");
+  testRoma("あっお", "axtuo");
+  testRoma("あっな", "axtuna");
+  testRoma("あっに", "axtuni");
+  testRoma("あっぬ", "axtunu");
+  testRoma("あっね", "axtune");
+  testRoma("あっの", "axtuno");
+});
 Deno.test("Shortest check", () => {
   testRoma("あかちゃん", "akachann");
   testRoma("ぎじゅつしゃ", "gijutsusha");
   testRoma("かがくしゃ", "kagakusha");
+  testRoma("けっしょう", "kesshou");
+  testRoma("がっこう", "gakkou");
 });
 Deno.test("SudachiDict", async () => {
   await testSudachi(dicts);
