@@ -632,7 +632,7 @@ export const table = {
 };
 
 export function hiraToRoma(str) {
-  const regTu = /っ([^aiueon-])/gm;
+  const regTu = /っ([bcdfghjklmpqrstvwxyz])/gm;
   const regXtu = /っ/gm;
 
   const max = str.length;

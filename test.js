@@ -58,6 +58,8 @@ function traverse(node, path = [], result = []) {
 
 Deno.test("Simple check", () => {
   testHira("-");
+  testHira("!\"#$%&'()=~|@`+*;:<>,./?_･[]{}\\^");
+  testHira("！”＃＄％＆’（）〜｜＠｀＋＊；：＜＞、。／？＿・「」｛｝￥＾");
   testHira("ゐゑ");
   testHira("っっっ");
   testHira("はがっにゃ");
@@ -81,6 +83,9 @@ Deno.test("Single way check", () => {
   });
 });
 Deno.test("XTU check", () => {
+  testHiraRoma("あっネコ", "axtuネコ");
+  testHiraRoma("あっ犬", "axtu犬");
+  testHiraRoma("あっ!?", "axtu!?");
   testHiraRoma("あっー", "axtu-");
   testHiraRoma("あっあ", "axtua");
   testHiraRoma("あっい", "axtui");
