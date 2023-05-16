@@ -25,7 +25,8 @@ MIT
 - `romaToHira()` is inspired from
   [JavaScriptでローマ字をカタカナに変換する関数](https://qiita.com/recordare/items/35a27f6b88b9413fef91)
 - `hiraToRoma()` is inspired from
-  [cloneko/kana2romaji](https://github.com/cloneko/kana2romaji)
+  [cloneko/kana2romaji](https://github.com/cloneko/kana2romaji) &
+  [平仮名をローマ字表記に変換する。その２　多分こっちが高速？](https://babu-babu-baboo.hateblo.jp/entry/20091114/1258161477)
 
 ## References
 
