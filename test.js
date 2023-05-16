@@ -20,7 +20,7 @@ async function testSudachi(dicts) {
     const fileReader = await Deno.open(dict);
     for await (const line of readLines(fileReader)) {
       const yomiKana = line.split(",")[11];
-      if (!yomiKana.match(/^[ァ-ヶー-]+$/)) continue;
+      if (!yomiKana.match(/^[ァ-ヶーゐゑ-]+$/)) continue;
       const yomiHira = kanaToHira(yomiKana);
       const yomiFrom = yomiHira.replace(/-/g, "ー");
       const yomiTo = romaToHira(hiraToRoma(yomiFrom));
@@ -36,7 +36,7 @@ function testHira(hira) {
   assertEquals(yomiFrom, yomiTo);
 }
 
-function testRoma(hira, romaTest) {
+function testHiraRoma(hira, romaTest) {
   hira = hira.replace(/-/g, "ー");
   const roma = hiraToRoma(hira);
   assertEquals(roma, romaTest);
@@ -44,6 +44,7 @@ function testRoma(hira, romaTest) {
 
 Deno.test("Simple check", () => {
   testHira("-");
+  testHira("ゐゑ");
   testHira("っっっ");
   testHira("はがっにゃ");
   testHira("ぎじゅつしゃ");
@@ -52,24 +53,24 @@ Deno.test("Simple check", () => {
   testHira("👨‍👩‍👧‍👦");
 });
 Deno.test("XTU check", () => {
-  testRoma("あっー", "axtu-");
-  testRoma("あっあ", "axtua");
-  testRoma("あっい", "axtui");
-  testRoma("あっう", "axtuu");
-  testRoma("あっえ", "axtue");
-  testRoma("あっお", "axtuo");
-  testRoma("あっな", "axtuna");
-  testRoma("あっに", "axtuni");
-  testRoma("あっぬ", "axtunu");
-  testRoma("あっね", "axtune");
-  testRoma("あっの", "axtuno");
+  testHiraRoma("あっー", "axtu-");
+  testHiraRoma("あっあ", "axtua");
+  testHiraRoma("あっい", "axtui");
+  testHiraRoma("あっう", "axtuu");
+  testHiraRoma("あっえ", "axtue");
+  testHiraRoma("あっお", "axtuo");
+  testHiraRoma("あっな", "axtuna");
+  testHiraRoma("あっに", "axtuni");
+  testHiraRoma("あっぬ", "axtunu");
+  testHiraRoma("あっね", "axtune");
+  testHiraRoma("あっの", "axtuno");
 });
 Deno.test("Shortest check", () => {
-  testRoma("あかちゃん", "akachann");
-  testRoma("ぎじゅつしゃ", "gijutsusha");
-  testRoma("かがくしゃ", "kagakusha");
-  testRoma("けっしょう", "kesshou");
-  testRoma("がっこう", "gakkou");
+  testHiraRoma("あかちゃん", "akachann");
+  testHiraRoma("ぎじゅつしゃ", "gijutsusha");
+  testHiraRoma("かがくしゃ", "kagakusha");
+  testHiraRoma("けっしょう", "kesshou");
+  testHiraRoma("がっこう", "gakkou");
 });
 Deno.test("SudachiDict", async () => {
   await testSudachi(dicts);
