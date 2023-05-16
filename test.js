@@ -43,7 +43,7 @@ function testHiraRoma(hira, romaTest) {
 }
 
 function traverse(node, path = [], result = []) {
-  if (typeof node === "object" && !Array.isArray(node)) {
+  if (typeof node === "object") {
     for (const [key, value] of Object.entries(node)) {
       const newPath = [...path, key];
       traverse(value, newPath, result);
