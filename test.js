@@ -17,16 +17,20 @@ const dicts = [
 
 async function testSudachi(dicts) {
   for (const dict of dicts) {
-    const fileReader = await Deno.open(dict);
-    for await (const line of readLines(fileReader)) {
-      const yomiKana = line.split(",")[11];
-      if (!yomiKana.match(/^[ァ-ヶーゐゑ-]+$/)) continue;
-      const yomiHira = kanaToHira(yomiKana);
-      const yomiFrom = yomiHira.replace(/-/g, "ー");
-      const yomiTo = romaToHira(hiraToRoma(yomiFrom));
-      assertEquals(yomiFrom, yomiTo);
+    try {
+      const fileReader = await Deno.open(dict);
+      for await (const line of readLines(fileReader)) {
+        const yomiKana = line.split(",")[11];
+        if (!yomiKana.match(/^[ァ-ヶーゐゑ-]+$/)) continue;
+        const yomiHira = kanaToHira(yomiKana);
+        const yomiFrom = yomiHira.replace(/-/g, "ー");
+        const yomiTo = romaToHira(hiraToRoma(yomiFrom));
+        assertEquals(yomiFrom, yomiTo);
+      }
+      fileReader.close();
+    } catch (error) {
+      throw new Error(error);
     }
-    fileReader.close();
   }
 }
 
