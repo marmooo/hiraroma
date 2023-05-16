@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { readLines } from "https://deno.land/std/io/mod.ts";
-import { hiraToRoma, romaToHira } from "./mod.js";
+import { tree, table, hiraToRoma, romaToHira } from "./mod.js";
 
 function kanaToHira(str) {
   return str.replace(/[ァ-ヶ]/g, function (match) {
@@ -42,6 +42,20 @@ function testHiraRoma(hira, romaTest) {
   assertEquals(roma, romaTest);
 }
 
+function traverse(node, path = [], result = []) {
+  if (typeof node === "object" && !Array.isArray(node)) {
+    for (const [key, value] of Object.entries(node)) {
+      const newPath = [...path, key];
+      traverse(value, newPath, result);
+      if (typeof value === "string") {
+        const kv = [newPath.join(""), value];
+        result.push(kv);
+      }
+    }
+  }
+  return result;
+}
+
 Deno.test("Simple check", () => {
   testHira("-");
   testHira("ゐゑ");
@@ -51,6 +65,20 @@ Deno.test("Simple check", () => {
   testHira("吉野家");
   testHira("😄💢✋");
   testHira("👨‍👩‍👧‍👦");
+});
+Deno.test("Single way check", () => {
+  traverse(tree).forEach(([roma, hira]) => {
+    const tableRoma = table[hira];
+    if (!tableRoma) {
+      if (roma == "xtu") return assertEquals(hira, "っ");
+      if (roma == "xtsu") return assertEquals(hira, "っ");
+      if (roma == "ltu") return assertEquals(hira, "っ");
+      if (roma == "ltsu") return assertEquals(hira, "っ");
+      throw new Error("Missing test definition");
+    } else if (roma != tableRoma) {
+      assertEquals(tableRoma, hiraToRoma(romaToHira(roma)));
+    }
+  });
 });
 Deno.test("XTU check", () => {
   testHiraRoma("あっー", "axtu-");
