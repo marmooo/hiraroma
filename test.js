@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { readLines } from "https://deno.land/std/io/mod.ts";
-import { tree, table, hiraToRoma, romaToHira } from "./mod.js";
+import { hiraToRoma, romaToHira, table, tree } from "./mod.js";
 
 function kanaToHira(str) {
   return str.replace(/[ァ-ヶ]/g, function (match) {
