@@ -121,6 +121,13 @@ Deno.test("Short hatsuon check", () => {
   testRomaHira("ponpon", "ぽんぽん");
   testRomaHira("kanjou", "かんじょう");
 });
+Deno.test("Short sokuon check", () => {
+  testRomaHira("macccho", "まっっちょ");
+  testRomaHira("alltu", "あっっ");
+  testRomaHira("nyokilltu", "にょきっっ");
+  testRomaHira("nyokkki", "にょっっき");
+  testRomaHira("xxtu", "っっ");
+});
 Deno.test("SudachiDict", async () => {
   await testSudachi(dicts);
 });
