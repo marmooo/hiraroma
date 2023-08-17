@@ -3,7 +3,7 @@ import { readLines } from "https://deno.land/std/io/mod.ts";
 import { hiraToRoma, romaToHira, table, tree } from "./mod.js";
 
 function kanaToHira(str) {
-  return str.replace(/[ァ-ヶ]/g, function (match) {
+  return str.replace(/[ァ-ヶ]/g, (match) => {
     const chr = match.charCodeAt(0) - 0x60;
     return String.fromCharCode(chr);
   });
@@ -44,6 +44,11 @@ function testHiraRoma(hira, romaTest) {
   hira = hira.replace(/-/g, "ー");
   const roma = hiraToRoma(hira);
   assertEquals(roma, romaTest);
+}
+
+function testRomaHira(roma, hiraTest) {
+  const hira = romaToHira(roma);
+  assertEquals(hira, hiraTest);
 }
 
 function traverse(node, path = [], result = []) {
@@ -108,6 +113,13 @@ Deno.test("Shortest check", () => {
   testHiraRoma("かがくしゃ", "kagakusha");
   testHiraRoma("けっしょう", "kesshou");
   testHiraRoma("がっこう", "gakkou");
+});
+Deno.test("Short hatsuon check", () => {
+  testRomaHira("anko", "あんこ");
+  testRomaHira("tankobu", "たんこぶ");
+  testRomaHira("tantanmenn", "たんたんめん");
+  testRomaHira("ponpon", "ぽんぽん");
+  testRomaHira("kanjou", "かんじょう");
 });
 Deno.test("SudachiDict", async () => {
   await testSudachi(dicts);
