@@ -108,6 +108,18 @@ Deno.test("Sokuon check", () => {
   testHiraRoma("あっの", "axtuno");
   testHiraRoma("あっにゃ", "axtunya");
 });
+Deno.test("Hatsuon check", () => {
+  testRomaHira("annnya", "あんにゃ");
+  testRomaHira("annya", "あんや");
+  testRomaHira("anno", "あんお");
+  testRomaHira("annno", "あんの");
+  testRomaHira("annki", "あんき");
+  testRomaHira("axnnya", "あんにゃ");
+  testRomaHira("axnya", "あんや");
+  testRomaHira("axno", "あんお");
+  testRomaHira("axnno", "あんの");
+  testRomaHira("axnki", "あんき");
+});
 Deno.test("Shortest check", () => {
   testHiraRoma("あかちゃん", "akachann");
   testHiraRoma("ぎじゅつしゃ", "gijutsusha");
