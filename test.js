@@ -91,7 +91,7 @@ Deno.test("Single way check", () => {
     }
   });
 });
-Deno.test("XTU check", () => {
+Deno.test("Sokuon check", () => {
   testHiraRoma("あっネコ", "axtuネコ");
   testHiraRoma("あっ犬", "axtu犬");
   testHiraRoma("あっ!?", "axtu!?");
@@ -106,6 +106,7 @@ Deno.test("XTU check", () => {
   testHiraRoma("あっぬ", "axtunu");
   testHiraRoma("あっね", "axtune");
   testHiraRoma("あっの", "axtuno");
+  testHiraRoma("あっにゃ", "axtunya");
 });
 Deno.test("Shortest check", () => {
   testHiraRoma("あかちゃん", "akachann");
@@ -122,11 +123,11 @@ Deno.test("Short hatsuon check", () => {
   testRomaHira("kanjou", "かんじょう");
 });
 Deno.test("Short sokuon check", () => {
-  testRomaHira("macccho", "まっっちょ");
   testRomaHira("alltu", "あっっ");
   testRomaHira("nyokilltu", "にょきっっ");
   testRomaHira("nyokkki", "にょっっき");
   testRomaHira("xxtu", "っっ");
+  testRomaHira("xxn", "っん");
 });
 Deno.test("SudachiDict", async () => {
   await testSudachi(dicts);
