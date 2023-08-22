@@ -1,11 +1,11 @@
 # hiraroma
 
-ひらがなとローマ字を相互変換します。
+Convert between hiragana and romaji.
 
 ## Usage
 
 ```
-import { hiraToRoma, romaToHira } from "https://raw.githubusercontent.com/marmooo/hiraroma/main/mod.js";
+import { hiraToRoma, romaToHira } from "hiraroma";
 
 console.log(hiraToRoma("しょうがっこう")); // --> shougakkou
 console.log(romaToHira("chuugakkou")); // --> ちゅうがっこう
