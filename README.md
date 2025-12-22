@@ -30,4 +30,5 @@ MIT
 
 ## References
 
+- [ローマ字のつづり方（令和7年12月22日内閣告示）](https://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/roma/index2.html)
 - [ローマ字入力 - Wikipedia](https://ja.wikipedia.org/wiki/ローマ字入力)
